@@ -29,3 +29,4 @@
 /Users/ykpfly/Desktop/PROG30000/Group_Project/OnlineFoodOrderingSystem/obj/Debug/net8.0/OnlineFoodOrderingSystem.pdb
 /Users/ykpfly/Desktop/PROG30000/Group_Project/OnlineFoodOrderingSystem/obj/Debug/net8.0/OnlineFoodOrderingSystem.genruntimeconfig.cache
 /Users/ykpfly/Desktop/PROG30000/Group_Project/OnlineFoodOrderingSystem/obj/Debug/net8.0/ref/OnlineFoodOrderingSystem.dll
+/Users/ykpfly/Desktop/PROG30000/Group_Project/OnlineFoodOrderingSystem/obj/Debug/net8.0/OnlineFoodOrderingSystem.sourcelink.json
