@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/ykpfly/Desktop/PROG30000/Group_Project/OnlineFoodOrderingSystem/OnlineFoodOrderingSystem.csproj": {}
+    "/Users/ykpfly/Desktop/PROG30000/Group_Project/Online-Food-Ordering-System/OnlineFoodOrderingSystem.csproj": {}
   },
   "projects": {
-    "/Users/ykpfly/Desktop/PROG30000/Group_Project/OnlineFoodOrderingSystem/OnlineFoodOrderingSystem.csproj": {
+    "/Users/ykpfly/Desktop/PROG30000/Group_Project/Online-Food-Ordering-System/OnlineFoodOrderingSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ykpfly/Desktop/PROG30000/Group_Project/OnlineFoodOrderingSystem/OnlineFoodOrderingSystem.csproj",
+        "projectUniqueName": "/Users/ykpfly/Desktop/PROG30000/Group_Project/Online-Food-Ordering-System/OnlineFoodOrderingSystem.csproj",
         "projectName": "OnlineFoodOrderingSystem",
-        "projectPath": "/Users/ykpfly/Desktop/PROG30000/Group_Project/OnlineFoodOrderingSystem/OnlineFoodOrderingSystem.csproj",
+        "projectPath": "/Users/ykpfly/Desktop/PROG30000/Group_Project/Online-Food-Ordering-System/OnlineFoodOrderingSystem.csproj",
         "packagesPath": "/Users/ykpfly/.nuget/packages/",
-        "outputPath": "/Users/ykpfly/Desktop/PROG30000/Group_Project/OnlineFoodOrderingSystem/obj/",
+        "outputPath": "/Users/ykpfly/Desktop/PROG30000/Group_Project/Online-Food-Ordering-System/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/ykpfly/.nuget/NuGet/NuGet.Config"
@@ -43,6 +43,18 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
