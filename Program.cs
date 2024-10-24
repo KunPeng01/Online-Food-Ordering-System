@@ -1,7 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using OnlineFoodOrderingSystem.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Register ApplicationDbContext with SQLite
+builder.Services.AddDbContext<OnlineFoodOrderDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
