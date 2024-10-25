@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using OnlineFoodOrderingSystem.Models.Users;
+using OnlineFoodOrderingSystem.Models.Users.Admin;
+using OnlineFoodOrderingSystem.Models.Users.Customer;
+using OnlineFoodOrderingSystem.Models.Users.Provider;
 
 namespace OnlineFoodOrderingSystem.Data
 {
