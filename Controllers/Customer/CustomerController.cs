@@ -41,6 +41,12 @@ namespace OnlineFoodOrderingSystem.Controllers.Customer{
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Login()
+        {
+            return View();
+        }
+
 
     }
 }
