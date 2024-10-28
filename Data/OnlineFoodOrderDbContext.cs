@@ -3,6 +3,7 @@ using OnlineFoodOrderingSystem.Models.Users.Admin;
 using OnlineFoodOrderingSystem.Models.Users.Customer;
 using OnlineFoodOrderingSystem.Models.Users.Provider;
 using OnlineFoodOrderingSystem.Models.Preference;
+using OnlineFoodOrderingSystem.Models.Items;
 
 namespace OnlineFoodOrderingSystem.Data
 {
@@ -18,5 +19,8 @@ namespace OnlineFoodOrderingSystem.Data
 
         public DbSet<CustomerPreference> CustomerPreference{ get; set; }
         public DbSet<Preference> Preference{ get; set; }
+
+        //product table
+        public DbSet<Product> Product {get; set;}
     }
 }
