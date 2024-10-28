@@ -11,8 +11,8 @@ using OnlineFoodOrderingSystem.Data;
 namespace OnlineFoodOrderingSystem.Migrations
 {
     [DbContext(typeof(OnlineFoodOrderDbContext))]
-    [Migration("20241028180758_AddProductTable")]
-    partial class AddProductTable
+    [Migration("20241028185649_ProductTable")]
+    partial class ProductTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,10 @@ namespace OnlineFoodOrderingSystem.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

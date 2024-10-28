@@ -22,6 +22,7 @@ namespace OnlineFoodOrderingSystem.Models.Items
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price {get;set;}
 
+        public string ImageUrl {get; set;}
         //public int ProviderID{}
         [Required]
         public Provider Provider {get; set;}
