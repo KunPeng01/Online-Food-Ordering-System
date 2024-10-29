@@ -14,6 +14,8 @@ namespace OnlineFoodOrderingSystem.Controllers.Customer{
             _context=context;
         }
 
+        //This is a comment to test git commits and merging
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(OnlineFoodOrderingSystem.Models.Users.Customer.Customer customer){
