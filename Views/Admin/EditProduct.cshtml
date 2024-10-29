@@ -1,0 +1,45 @@
+@model OnlineFoodOrderingSystem.Models.Items.Product // Accepting a single product model
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <h1>@ViewData["Title"]</h1>
+    <form asp-action="EditProduct" method="post">
+        <div>
+            <label asp-for="ProductID"></label>
+            <input asp-for="ProductID" readonly />
+        </div>
+        <div>
+            <label asp-for="Name"></label>
+            <input asp-for="Name" />
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div>
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description"></textarea>
+            <span asp-validation-for="Description"></span>
+        </div>
+        <div>
+            <label asp-for="Price"></label>
+            <input asp-for="Price" />
+            <span asp-validation-for="Price"></span>
+        </div>
+        <div>
+            <label asp-for="ImageUrl"></label>
+            <input asp-for="ImageUrl" />
+            <span asp-validation-for="ImageUrl"></span>
+        </div>
+        <button type="submit">Save Changes</button>
+        <a href="@Url.Action("Index")">Cancel</a>
+    </form>
+  
+</body>
+</html>

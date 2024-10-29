@@ -40,5 +40,37 @@ namespace OnlineFoodOrderingSystem.Controllers.Administrator
             return View(product);
         }
 
+        [HttpGet]
+        [Route("Admin/EditProduct")]
+        public IActionResult EditProduct(long id){
+            var product = _context.Product.Find(id);
+            return View(product);
+        }
+
+
+        [HttpPost]
+        [Route("Admin/EditProduct")]
+        public async Task<IActionResult> EditProduct(Product product)
+        {
+            if(ModelState.IsValid)
+            {
+                _context.Product.Update(product);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(product);
+        }
+
+        // [HttpGet]
+        // public async DeleteProduct(long id){
+        //     var product = _context.Product.Find(id);
+
+        //     await _context.Product.Remove(product);
+        //     return RedirectToAction(nameof(Index));
+
+
+
+        // }
+
     }
 }
