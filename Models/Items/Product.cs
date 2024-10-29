@@ -25,9 +25,9 @@ namespace OnlineFoodOrderingSystem.Models.Items
         public decimal Price {get;set;}
 
         public string ImageUrl {get; set;}
-        //public int ProviderID{}
-        [Required]
-        public Provider Provider {get; set;}
+        public int ProviderID{get; set;}
+        // [Required]
+        // public Provider Provider {get; set;}
 
     }
 }

@@ -121,14 +121,14 @@ namespace OnlineFoodOrderingSystem.Migrations
                     Description = table.Column<string>(type: "TEXT", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ImageUrl = table.Column<string>(type: "TEXT", nullable: false),
-                    ProviderUserId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ProviderId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Product", x => x.ProductID);
                     table.ForeignKey(
-                        name: "FK_Product_Provider_ProviderUserId",
-                        column: x => x.ProviderUserId,
+                        name: "FK_Product_Provider_ProviderId",
+                        column: x => x.ProviderId,
                         principalTable: "Provider",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
@@ -145,9 +145,9 @@ namespace OnlineFoodOrderingSystem.Migrations
                 column: "PreferenceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_ProviderUserId",
+                name: "IX_Product_ProviderId",
                 table: "Product",
-                column: "ProviderUserId");
+                column: "ProviderId");
         }
 
         /// <inheritdoc />
