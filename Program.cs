@@ -7,7 +7,7 @@ builder.Services.AddControllersWithViews();
 
 // Register ApplicationDbContext with SQLite
 builder.Services.AddDbContext<OnlineFoodOrderDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
