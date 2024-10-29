@@ -11,55 +11,55 @@ namespace OnlineFoodOrderingSystem.Controllers.Customer
 {
     public class CustomerController : Controller
     {
-        private readonly OnlineFoodOrderDbContext _context;
-        public CustomerController(OnlineFoodOrderDbContext context)
-        {
-            _context = context;
-        }
+        // private readonly OnlineFoodOrderDbContext _context;
+        // public CustomerController(OnlineFoodOrderDbContext context)
+        // {
+        //     _context = context;
+        // }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(OnlineFoodOrderingSystem.Models.Users.Customer.Customer customer)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(customer);
-                await _context.SaveChangesAsync();
-                return View("Thanks", customer);
-            }
-            return View(customer);
-        }
+        // [HttpPost]
+        // [ValidateAntiForgeryToken]
+        // public async Task<IActionResult> Create(OnlineFoodOrderingSystem.Models.Users.Customer.Customer customer)
+        // {
+        //     if (ModelState.IsValid)
+        //     {
+        //         _context.Add(customer);
+        //         await _context.SaveChangesAsync();
+        //         return View("Thanks", customer);
+        //     }
+        //     return View(customer);
+        // }
 
-        [HttpGet]
-        public IActionResult Index()
-        {
-            return View();
-        }
+        // [HttpGet]
+        // public IActionResult Index()
+        // {
+        //     return View();
+        // }
 
-        [HttpGet]
-        public async Task<IActionResult> Create()
-        {
-            return View();
-        }
+        // [HttpGet]
+        // public async Task<IActionResult> Create()
+        // {
+        //     return View();
+        // }
 
-        [HttpGet]
-        public IActionResult Thanks(OnlineFoodOrderingSystem.Models.Users.Customer.Customer customer)
-        {
-            return View();
-        }
+        // [HttpGet]
+        // public IActionResult Thanks(OnlineFoodOrderingSystem.Models.Users.Customer.Customer customer)
+        // {
+        //     return View();
+        // }
 
-        [HttpGet]
-        public async Task<IActionResult> Login()
-        {
-            return View();
-        }
+        // [HttpGet]
+        // public async Task<IActionResult> Login()
+        // {
+        //     return View();
+        // }
 
-        [HttpGet]
-        public async Task<IActionResult> List()
-        {
-            var customers = _context.Customer.ToList();
-            return View(customers);
-        }
+        // [HttpGet]
+        // public async Task<IActionResult> List()
+        // {
+        //     var customers = _context.Customer.ToList();
+        //     return View(customers);
+        // }
 
 
     }

@@ -7,20 +7,16 @@ using OnlineFoodOrderingSystem.Models.Items;
 
 namespace OnlineFoodOrderingSystem.Data
 {
-    public class OnlineFoodOrderDbContext:DbContext
+    public class OnlineFoodOrderDbContext : DbContext
     {
-        public OnlineFoodOrderDbContext(DbContextOptions<OnlineFoodOrderDbContext> options):base(options)
+        public OnlineFoodOrderDbContext(DbContextOptions<OnlineFoodOrderDbContext> options) : base(options)
         {
         }
-        
-        public DbSet<Provider> Provider{ get; set; }
-        public DbSet<Customer> Customer{ get; set; }
-        public DbSet<Admin> Admin{ get; set; }
 
-        public DbSet<CustomerPreference> CustomerPreference{ get; set; }
-        public DbSet<Preference> Preference{ get; set; }
-
-        //product table
-        public DbSet<Product> Product {get; set;}
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Admin> Admins { get; set; }
+        public DbSet<Provider> Providers { get; set; }
+        public DbSet<Preference> Preferences { get; set; }
     }
 }

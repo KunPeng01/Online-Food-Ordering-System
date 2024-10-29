@@ -17,7 +17,7 @@ namespace OnlineFoodOrderingSystem.Controllers.Administrator
         }
 
         public IActionResult Index(){
-            var products = _context.Product.ToList();
+            var products = _context.Products.ToList();
             Console.WriteLine("Getting all items");
             return View(products);
         }
@@ -32,7 +32,7 @@ namespace OnlineFoodOrderingSystem.Controllers.Administrator
         [Route("Admin/CreateProduct")]
         public async Task<IActionResult> CreateProduct(Product product){
             if(ModelState.IsValid){
-                _context.Product.Add(product);
+                _context.Products.Add(product);
                 await _context.SaveChangesAsync();
                 Console.WriteLine("Product Added");
                 return RedirectToAction(nameof(Index));
@@ -43,7 +43,7 @@ namespace OnlineFoodOrderingSystem.Controllers.Administrator
         [HttpGet]
         [Route("Admin/EditProduct")]
         public IActionResult EditProduct(long id){
-            var product = _context.Product.Find(id);
+            var product = _context.Products.Find(id);
             return View(product);
         }
 
@@ -54,7 +54,7 @@ namespace OnlineFoodOrderingSystem.Controllers.Administrator
         {
             if(ModelState.IsValid)
             {
-                _context.Product.Update(product);
+                _context.Products.Update(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -63,14 +63,13 @@ namespace OnlineFoodOrderingSystem.Controllers.Administrator
 
         // [HttpGet]
         // public async DeleteProduct(long id){
-        //     var product = _context.Product.Find(id);
+        //     var product = _context.Products.Find(id);
 
-        //     await _context.Product.Remove(product);
-        //     return RedirectToAction(nameof(Index));
+        //     await _context.Products.Remove(product);
+        // //     return RedirectToAction(nameof(Index));
 
 
 
-        // }
+         }
 
     }
-}
