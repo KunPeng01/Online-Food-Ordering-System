@@ -7,38 +7,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OnlineFoodOrderingSystem.Controllers.Customer{
-    public class CustomerController:Controller{
+namespace OnlineFoodOrderingSystem.Controllers.Customer
+{
+    public class CustomerController : Controller
+    {
         private readonly OnlineFoodOrderDbContext _context;
-        public CustomerController(OnlineFoodOrderDbContext context){
-            _context=context;
+        public CustomerController(OnlineFoodOrderDbContext context)
+        {
+            _context = context;
         }
-
-        //This is a comment to test git commits and merging
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(OnlineFoodOrderingSystem.Models.Users.Customer.Customer customer){
-            if(ModelState.IsValid){
-            _context.Add(customer);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Thanks",customer);
+        public async Task<IActionResult> Create(OnlineFoodOrderingSystem.Models.Users.Customer.Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(customer);
+                await _context.SaveChangesAsync();
+                return View("Thanks", customer);
             }
             return View(customer);
         }
 
         [HttpGet]
-        public IActionResult Index(){
+        public IActionResult Index()
+        {
             return View();
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create(){
+        public async Task<IActionResult> Create()
+        {
             return View();
         }
 
         [HttpGet]
-         public IActionResult Thanks(OnlineFoodOrderingSystem.Models.Users.Customer.Customer customer)
+        public IActionResult Thanks(OnlineFoodOrderingSystem.Models.Users.Customer.Customer customer)
         {
             return View();
         }
@@ -47,6 +52,13 @@ namespace OnlineFoodOrderingSystem.Controllers.Customer{
         public async Task<IActionResult> Login()
         {
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> List()
+        {
+            var customers = _context.Customer.ToList();
+            return View(customers);
         }
 
 
