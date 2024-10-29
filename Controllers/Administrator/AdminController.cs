@@ -19,20 +19,25 @@ namespace OnlineFoodOrderingSystem.Controllers.Administrator
         public IActionResult Index(){
             var products = _context.Product.ToList();
             Console.WriteLine("Getting all items");
-            //return View();
-            return Json(products);
+            return View(products);
+        }
+
+        [HttpGet]
+        [Route("Admin/CreateProduct")]
+        public IActionResult CreateProduct(){
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateProduct([FromBody]Product product){
+        [Route("Admin/CreateProduct")]
+        public async Task<IActionResult> CreateProduct(Product product){
             if(ModelState.IsValid){
                 _context.Product.Add(product);
                 await _context.SaveChangesAsync();
                 Console.WriteLine("Product Added");
-                //return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
             }
-            //return View(product);
-            return BadRequest(ModelState);
+            return View(product);
         }
 
     }

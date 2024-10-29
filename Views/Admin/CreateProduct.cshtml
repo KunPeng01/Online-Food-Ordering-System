@@ -1,0 +1,38 @@
+@model OnlineFoodOrderingSystem.Models.Items.Product
+@{
+    ViewData["Title"] = "Create Product";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>@ViewData["Title"]</h1>
+        <form asp-action="CreateProduct" method="post">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" name="Name" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text" name="Description" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label>Price</label>
+                <input type="number" name="Price" class="form-control" step="0.01" required />
+            </div>
+            <div class="form-group">
+                <label>Image URL</label>
+                <input type="text" name="ImageUrl" class="form-control" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Create Product</button>
+        </form>
+    </div>
+</body>
+</html>
