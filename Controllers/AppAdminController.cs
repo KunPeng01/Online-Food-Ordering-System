@@ -16,7 +16,7 @@ public class AppAdminController:Controller
 
     public IActionResult Index()
     {
-        return View();
+        return View(_userManager.Users);
     }
     
     [HttpPost]
@@ -26,7 +26,7 @@ public class AppAdminController:Controller
         {
             var user = new AppUser
             {
-                UserName = appAdmin.Email,
+                UserName = appAdmin.Name,
                 Email = appAdmin.Email
             };
             var result = await _userManager.CreateAsync(user, appAdmin.Password);

@@ -1,0 +1,29 @@
+@model IEnumerable<OnlineFoodOrderingSystem.Models.Users.Admin.AppUser>
+@{
+    ViewData["Title"] = "READ USER";
+}
+
+<h1 class="bg-info text-white">All Users</h1>
+<a asp-action="CreateAdmin" asp-controller="AppAdmin" class="btn btn-secondary">Create a User</a>
+
+<table class="table table-sm table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Update</th>
+    </tr>
+    @foreach (OnlineFoodOrderingSystem.Models.Users.Admin.AppUser user in Model)
+    {
+        <tr>
+            <td>@user.Id</td>
+            <td>@user.UserName</td>
+            <td>@user.Email</td>
+            <td>
+                <a class="btn btn-sm btn-primary" asp-action="Update" asp-route-id="@user.Id">
+                    Update
+                </a>
+            </td>
+        </tr>
+    }
+</table>
