@@ -12,7 +12,7 @@ namespace OnlineFoodOrderingSystem.Models.Items
     {
 
         [Key]
-        public long ProductID {get;set;}
+        public static long ProductID {get;set;}
 
         [Required]
         public string Name {get; set;}

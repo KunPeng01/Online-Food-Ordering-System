@@ -61,15 +61,13 @@ namespace OnlineFoodOrderingSystem.Controllers.Administrator
             return View(product);
         }
 
-        // [HttpGet]
-        // public async DeleteProduct(long id){
-        //     var product = _context.Products.Find(id);
-
-        //     await _context.Products.Remove(product);
-        // //     return RedirectToAction(nameof(Index));
-
-
+        [HttpPost]
+        public async Task<IActionResult> DeleteProduct(long id){
+            var product = await _context.Products.FindAsync(id);
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
 
          }
-
     }
+}
