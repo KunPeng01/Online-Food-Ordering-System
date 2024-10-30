@@ -34,14 +34,18 @@ public class AccountController:Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(Login login)
     {
+        //Fix bug later, model state is not valid (returns false)
+        Console.WriteLine(ModelState.IsValid.ToString());
         if (ModelState.IsValid)
         {
+            
             AppUser appUser = await _userManager.FindByEmailAsync(login.Email);
             if (appUser != null)
             {
                 await _signInManager.SignOutAsync();
                 Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager
                     .PasswordSignInAsync(appUser, login.Password, false, false);
+                
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User {Email} logged in successfully.", login.Email);
