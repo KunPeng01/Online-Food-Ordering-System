@@ -99,4 +99,22 @@ public class AppAdminController:Controller
         foreach (IdentityError error in result.Errors)
             ModelState.AddModelError("", error.Description);
     }
+    
+    [HttpPost]
+    public async Task<IActionResult> Delete(string id)
+    {
+        AppUser user=await _userManager.FindByIdAsync(id);
+        if(user!=null)
+        {
+            IdentityResult result=await _userManager.DeleteAsync(user);
+            if(result.Succeeded)
+                return RedirectToAction("Index");
+            else
+                Errors(result);
+        }
+        else
+            ModelState.AddModelError("", "User Not Found");
+        
+        return RedirectToAction("Index",_userManager.Users);
+    }
 }
