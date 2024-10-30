@@ -21,7 +21,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<A
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = "/Account/Login"; 
+    options.LoginPath = "/Authenticate/Login"; 
 });
 
 var app = builder.Build();
