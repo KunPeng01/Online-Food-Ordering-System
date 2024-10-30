@@ -6,7 +6,7 @@
 <h1 class="bg-info text-white">Login</h1>
 <div class="text-danger" asp-validation-summary="All"></div>
  
-<form asp-action="Login" method="post">
+<form asp-action="Login" method="post" asp-controller="Account">
     <input type="hidden" asp-for="ReturnUrl" />
     <div class="form-group">
         <label asp-for="Email"></label>
