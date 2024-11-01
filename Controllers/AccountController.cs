@@ -28,44 +28,39 @@ public class AccountController:Controller
         login.ReturnUrl=returnUrl;
         return View(login);
     }
-    
+
     [HttpPost]
     [AllowAnonymous]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(Login login)
     {
         //Fix bug later, model state is not valid (returns false)
-        Console.WriteLine(ModelState.IsValid.ToString());
         if (ModelState.IsValid)
         {
-            
             AppUser appUser = await _userManager.FindByEmailAsync(login.Email);
             if (appUser != null)
             {
                 await _signInManager.SignOutAsync();
-                Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager
-                    .PasswordSignInAsync(appUser, login.Password, false, false);
-                
+                Microsoft.AspNetCore.Identity.SignInResult result =
+                    await _signInManager.PasswordSignInAsync(appUser, login.Password, false, false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User {Email} logged in successfully.", login.Email);
                     return Redirect(login.ReturnUrl ?? "/");
                 }
-                else
-                {
-                    _logger.LogWarning("Login failed for user {Email}.", login.Email);
-                }
+
+                ModelState.AddModelError(nameof(login.Email), "Invalid user or password");
             }
-            else
-            {
-                _logger.LogWarning("User {Email} not found.", login.Email);
-            }
-            ModelState.AddModelError(nameof(login.Email), "Login Failed: Invalid Email or password");
+
         }
+
         return View(login);
-        
+
     }
     
-    
+    public async Task<IActionResult> Logout()
+    {
+        await _signInManager.SignOutAsync();
+        return RedirectToAction("Index", "Home");
+    }
 
 }

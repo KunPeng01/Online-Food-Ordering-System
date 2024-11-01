@@ -18,10 +18,17 @@ builder.Services.AddDbContext<AppIdentityDbContext>(options =>
 
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>()
     .AddDefaultTokenProviders();
+builder.Services.Configure<IdentityOptions>(opts =>
+{
+    opts.User.RequireUniqueEmail = true;
+    opts.Password.RequiredLength = 8;
+    opts.Password.RequireLowercase = true;
+});
+
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = "/Authenticate/Login"; 
+    options.LoginPath = "/Account/Login"; 
 });
 
 var app = builder.Build();

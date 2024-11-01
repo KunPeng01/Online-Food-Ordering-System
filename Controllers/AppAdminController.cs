@@ -24,23 +24,27 @@ public class AppAdminController:Controller
     [HttpPost]
     public async Task<IActionResult> CreateAdmin(AppAdmin appAdmin)
     {
-        if(ModelState.IsValid)
+        if (ModelState.IsValid)
         {
-            var user = new AppUser
+            AppUser appUser = new AppUser()
             {
                 UserName = appAdmin.Name,
                 Email = appAdmin.Email
             };
-            var result = await _userManager.CreateAsync(user, appAdmin.Password);
-            if(result.Succeeded)
+            IdentityResult result = await _userManager.CreateAsync(appUser, appAdmin.Password);
+            if (result.Succeeded)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
-            foreach (var error in result.Errors)
+            else
             {
-                ModelState.AddModelError("", error.Description);
+                foreach (IdentityError error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
             }
         }
+
         return View(appAdmin);
     }
     

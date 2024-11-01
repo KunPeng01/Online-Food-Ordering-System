@@ -21,7 +21,8 @@ public class HomeController : Controller
     public async Task<IActionResult> Secured()
     {
         AppUser user = await _userManager.GetUserAsync(HttpContext.User);
-        string message = "Hello " + user.UserName;
+        string message= $"Hello {user.UserName}";
+        
         return View((object)message);
 
     }
