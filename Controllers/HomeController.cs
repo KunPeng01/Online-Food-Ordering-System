@@ -17,7 +17,7 @@ public class HomeController : Controller
         _userManager = userManager;
     } 
 
-    [Authorize]
+    [Authorize(Roles="Admin")]
     public async Task<IActionResult> Secured()
     {
         AppUser user = await _userManager.GetUserAsync(HttpContext.User);
