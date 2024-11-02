@@ -21,4 +21,14 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Models\Role\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Models\Role\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Views\Role\Create.cshtml" />
+    <AdditionalFiles Include="Views\Role\Index.cshtml" />
+  </ItemGroup>
+
 </Project>
