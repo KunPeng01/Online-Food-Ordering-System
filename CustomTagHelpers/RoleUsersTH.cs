@@ -21,6 +21,7 @@ public class RoleUsersTH:TagHelper
     
     public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
     {
+        Console.WriteLine("Debugging");
         List<string> names = new List<string>();
         IdentityRole role = await _roleManager.FindByIdAsync(Role);
         if (role != null)
@@ -29,9 +30,14 @@ public class RoleUsersTH:TagHelper
             {
                 if (user != null && await _userManager.IsInRoleAsync(user, role.Name))
                     names.Add(user.UserName);
+                
             }
         }
         output.Content.SetContent(names.Count == 0 ? "No Users" : string.Join(", ", names));
+        foreach (var name in names)
+        {
+            Console.WriteLine(name);
+        }
     }
 
 
