@@ -17,11 +17,11 @@ public class HomeController : Controller
         _userManager = userManager;
     } 
 
-    [Authorize(Roles="Admin")]
+    [Authorize(Roles="Customer")]
     public async Task<IActionResult> Secured()
     {
         AppUser user = await _userManager.GetUserAsync(HttpContext.User);
-        string message= $"Hello {user.UserName}";
+        string message= $"Hello this is customer {user.UserName}";
         
         return View((object)message);
 

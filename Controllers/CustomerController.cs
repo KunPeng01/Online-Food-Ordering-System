@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OnlineFoodOrderingSystem.Controllers.Customer
+namespace OnlineFoodOrderingSystem.Controllers
 {
     public class CustomerController : Controller
     {

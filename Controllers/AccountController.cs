@@ -22,10 +22,10 @@ public class AccountController:Controller
     }
     
     [AllowAnonymous]
-    public IActionResult Login(string returnUrl)
+    public IActionResult Login(string returnUrl=null)
     {
         Login login = new Login();
-        login.ReturnUrl=returnUrl;
+        login.ReturnUrl=returnUrl??Url.Content("~/");
         return View(login);
     }
 
@@ -34,27 +34,24 @@ public class AccountController:Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(Login login)
     {
-        //Fix bug later, model state is not valid (returns false)
-        if (ModelState.IsValid)
+        if(ModelState.IsValid)
         {
-            AppUser appUser = await _userManager.FindByEmailAsync(login.Email);
-            if (appUser != null)
+            AppUser user = await _userManager.FindByEmailAsync(login.Email);
+            if(user!=null)
             {
-                await _signInManager.SignOutAsync();
-                Microsoft.AspNetCore.Identity.SignInResult result =
-                    await _signInManager.PasswordSignInAsync(appUser, login.Password, false, false);
-                if (result.Succeeded)
+                var result = await _signInManager.PasswordSignInAsync(user, login.Password, false, false);
+                if(result.Succeeded)
                 {
-                    return Redirect(login.ReturnUrl ?? "/");
+                    var roles = await _userManager.GetRolesAsync(user);
+                    if (roles.Contains("Customer"))
+                    {
+                        return RedirectToAction("Index", "Customer");
+                    }
                 }
-
-                ModelState.AddModelError(nameof(login.Email), "Invalid user or password");
             }
-
         }
-
+        ModelState.AddModelError("", "Invalid login attempt");
         return View(login);
-
     }
     
     public async Task<IActionResult> Logout()
