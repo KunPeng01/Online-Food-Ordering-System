@@ -33,7 +33,9 @@ namespace OnlineFoodOrderingSystem.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            var products = _context.Products.ToList();
+            Console.WriteLine("Getting all items");
+            return View(products);
         }
 
         [HttpGet]
