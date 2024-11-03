@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<OnlineFoodOrderingSystem.Models.Items.Product> // Accepting a list of products
 @{
-    ViewData["Title"] = "Menu Items";
+    ViewData["Title"] = "Order";
 }
 
 <!DOCTYPE html>
@@ -17,7 +17,6 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Name</th>
                     <th>Price</th>
                     <th>Image</th>
@@ -27,20 +26,14 @@
                 @foreach (var product in Model)
                 {
                     <tr>
-                        <td>@product.ProductID</td>
                         <td>@product.Name</td>
                         <td>@product.Price.ToString("C")</td>
                         <td><img src="@product.ImageUrl" alt="@product.Name" style="width:100px;height:auto;" /></td>
                         <td>
-                            <form asp-action="EditProduct" asp-route-id="@product.ProductID" method="post" style="display:inline;">
-                                <button type="submit" class="btn btn-success btn-sm">Edit</button>
-                            </form>
-
-
-                            <form asp-action="DeleteProduct" asp-route-id="@product.ProductID" method="post" style="display:inline;">
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
+                            <label for="quantity">Quantity:</label>
+                            <input type="number" id="quantity" name="quantity" value="0"/>
                         </td>
+                        
                     </tr>
                 }
             </tbody>
