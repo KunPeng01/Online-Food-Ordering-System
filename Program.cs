@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnlineFoodOrderingSystem.Data;
 using OnlineFoodOrderingSystem.Models.Users.Admin;
+using OnlineFoodOrderingSystem.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,9 @@ builder.Services.AddDbContext<AppIdentityDbContext>(options =>
 
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<IProductService, ProductService>();
+
 builder.Services.Configure<IdentityOptions>(opts =>
 {
     opts.User.RequireUniqueEmail = true;
