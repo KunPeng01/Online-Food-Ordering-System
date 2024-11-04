@@ -9,27 +9,79 @@ namespace OnlineFoodOrderingSystem.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly UserManager<AppUser> _userManager;
+    private readonly SignInManager<AppUser> _signInManager;
 
-    private UserManager<AppUser> _userManager;
-    
-    public HomeController(UserManager<AppUser> userManager)
+    public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
     {
         _userManager = userManager;
-    } 
+        _signInManager = signInManager;
+    }
 
-    [Authorize(Roles="Customer")]
+    public IActionResult Index(string returnUrl = null)
+    {
+        if (User.Identity.IsAuthenticated)
+        {
+            var roles = _userManager.GetRolesAsync(_userManager.GetUserAsync(User).Result).Result;
+            if (roles.Contains("Customer"))
+            {
+                return RedirectToAction("Index", "Customer");
+            }
+            else if (roles.Contains("Admin"))
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+            // Add more roles as needed
+        }
+        return RedirectToAction("Login", "Account", new { returnUrl = returnUrl ?? Url.Content("~/") });
+    }
+
+    [Authorize(Roles = "Customer")]
     public async Task<IActionResult> Secured()
     {
         AppUser user = await _userManager.GetUserAsync(HttpContext.User);
-        string message= $"Hello this is customer {user.UserName}";
-        
-        return View((object)message);
+        string message = $"Hello this is customer {user.UserName}";
 
+        return View((object)message);
     }
-    
-    public IActionResult Index()
+
+    [HttpPost]
+    [AllowAnonymous]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Index(Login login, string returnUrl = null)
     {
-        return View();
+        if (ModelState.IsValid)
+        {
+            Console.WriteLine("Login attempt");
+            AppUser user = await _userManager.FindByEmailAsync(login.Email);
+            if (user != null)
+            {
+                var result = await _signInManager.PasswordSignInAsync(user, login.Password, false, false);
+                if (result.Succeeded)
+                {
+                    var roles = await _userManager.GetRolesAsync(user);
+                    if (roles.Contains("Customer"))
+                    {
+                        if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                        {
+                            return Redirect(returnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Customer");
+                        }
+                    }
+                    else if (roles.Contains("Admin"))
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
+                    // Add more roles as needed
+                }
+            }
+        }
+
+        ModelState.AddModelError("", "Invalid login attempt");
+        Console.WriteLine("Invalid login attempt");
+        return View(login);
     }
-    
 }

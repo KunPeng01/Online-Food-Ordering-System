@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace OnlineFoodOrderingSystem.Controllers;
 
-[Authorize]
+
 public class AccountController:Controller
 {
     private UserManager<AppUser> _userManager;
@@ -58,6 +58,44 @@ public class AccountController:Controller
     {
         await _signInManager.SignOutAsync();
         return RedirectToAction("Index", "Home");
+    }
+    
+    public IActionResult CreateCustomer()
+    {
+        return View();
+    }
+    
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> CreateCustomer(AppAdmin customer)
+    {
+        if(ModelState.IsValid)
+        {
+            AppUser user = new AppUser()
+            {
+                UserName = customer.Name,
+                Email = customer.Email
+            };
+            IdentityResult result = await _userManager.CreateAsync(user, customer.Password);
+            if(result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, "Customer");
+                return RedirectToAction("Thanks", "Account");
+            }
+            else
+            {
+                foreach (IdentityError error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+        }
+        return View(customer);
+    }
+    
+    public IActionResult Thanks()
+    {
+        return View();
     }
 
 }
