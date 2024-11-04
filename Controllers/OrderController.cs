@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OnlineFoodOrderingSystem.Data;
+using OnlineFoodOrderingSystem.Models;
 using OnlineFoodOrderingSystem.Models.Cart;
 using OnlineFoodOrderingSystem.Services;
 
@@ -39,6 +40,24 @@ namespace OnlineFoodOrderingSystem.Controllers
 
             return View("OrderSummary", orderedProducts);
         }
+
+        [HttpGet]
+        public IActionResult Checkout(){
+            return View(new CheckoutModel());
+        }
+
+        [HttpPost]
+        public IActionResult Checkout(CheckoutModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // TODO: Save order details, payment info, etc., to the database
+                // Redirect to confirmation or receipt page after successful order processing
+                return RedirectToAction("OrderConfirmation");
+            }
+            return View(model);
+        }
+
 
     }
 }

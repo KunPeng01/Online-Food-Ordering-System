@@ -1,0 +1,76 @@
+@model OnlineFoodOrderingSystem.Models.CheckoutModel
+
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="form-container">
+        <h2>@ViewData["Title"]</h2>
+        <form asp-action="Checkout" method="post">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" placeholder="Full Name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Address" class="form-label"></label>
+                <input asp-for="Address" class="form-control" placeholder="Street Address" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Phone" class="form-label"></label>
+                <input asp-for="Phone" class="form-control" placeholder="Phone Number" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" placeholder="Email Address" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Delivery Method</label>
+                <select asp-for="DeliveryMethod" class="form-select">
+                    <option value="Delivery">Delivery</option>
+                    <option value="Pickup">Pickup</option>
+                </select>
+                <span asp-validation-for="DeliveryMethod" class="text-danger"></span>
+            </div>
+
+            <h4 class="mt-4 mb-3">Payment Information</h4>
+
+            <div class="mb-3">
+                <label asp-for="CardNumber" class="form-label"></label>
+                <input asp-for="CardNumber" class="form-control" placeholder="Card Number" />
+                <span asp-validation-for="CardNumber" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="ExpirationDate" class="form-label"></label>
+                    <input asp-for="ExpirationDate" class="form-control" placeholder="MM/YY" />
+                    <span asp-validation-for="ExpirationDate" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Cvv" class="form-label"></label>
+                    <input asp-for="Cvv" class="form-control" placeholder="CVV" />
+                    <span asp-validation-for="Cvv" class="text-danger"></span>
+                </div>
+            </div>
+
+            <button  type="submit" class="btn btn-primary">Place Order</button>
+        </form>
+    </div>
+</body>
+</html>
