@@ -6,7 +6,7 @@ using OnlineFoodOrderingSystem.Models.Users.Admin;
 
 namespace OnlineFoodOrderingSystem.Controllers;
 
-
+[Authorize(Roles = "AppAdmin")]
 public class AppAdminController:Controller
 {
     private UserManager<AppUser> _userManager;
@@ -18,8 +18,7 @@ public class AppAdminController:Controller
         _passwordHasher=passwordHasher;
     }
 
-    [Authorize(Roles = "AppAdmin")]
-    [ValidateAntiForgeryToken]
+    
     public IActionResult Index()
     {
         Console.WriteLine("Getting all users");

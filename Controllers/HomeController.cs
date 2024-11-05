@@ -18,27 +18,12 @@ public class HomeController : Controller
         _signInManager = signInManager;
     }
 
-    public IActionResult Index(string returnUrl = null)
+    public IActionResult Index()
     {
-        if (User.Identity.IsAuthenticated)
-        {
-            var roles = _userManager.GetRolesAsync(_userManager.GetUserAsync(User).Result).Result;
-            if (roles.Contains("Customer"))
-            {
-                return RedirectToAction("Index", "Customer");
-            }
-            else if (roles.Contains("Admin"))
-            {
-                return RedirectToAction("Index", "Admin");
-            }
-            else if(roles.Contains("AppAdmin"))
-            {
-                Console.WriteLine("Get Method AppAdmin login");
-                return RedirectToAction("Index", "AppAdmin");
-            }
-            // Add more roles as needed
-        }
-        return View(new Login{ReturnUrl = returnUrl??Url.Content("~/")});
+
+
+        return View();
+
     }
 
     [Authorize(Roles = "Customer")]
@@ -55,6 +40,8 @@ public class HomeController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Index(Login login, string returnUrl = null)
     {
+        ViewData["ReturnUrl"] = returnUrl;
+
         if (ModelState.IsValid)
         {
             Console.WriteLine("Login attempt");
@@ -64,17 +51,15 @@ public class HomeController : Controller
                 var result = await _signInManager.PasswordSignInAsync(user, login.Password, false, false);
                 if (result.Succeeded)
                 {
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+
                     var roles = await _userManager.GetRolesAsync(user);
                     if (roles.Contains("Customer"))
                     {
-                        if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-                        {
-                            return Redirect(returnUrl);
-                        }
-                        else
-                        {
-                            return RedirectToAction("Index", "Customer");
-                        }
+                        return RedirectToAction("Index", "Customer");
                     }
                     else if (roles.Contains("AppAdmin"))
                     {
