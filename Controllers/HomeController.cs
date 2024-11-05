@@ -31,9 +31,14 @@ public class HomeController : Controller
             {
                 return RedirectToAction("Index", "Admin");
             }
+            else if(roles.Contains("AppAdmin"))
+            {
+                Console.WriteLine("Get Method AppAdmin login");
+                return RedirectToAction("Index", "AppAdmin");
+            }
             // Add more roles as needed
         }
-        return RedirectToAction("Login", "Account", new { returnUrl = returnUrl ?? Url.Content("~/") });
+        return View(new Login{ReturnUrl = returnUrl??Url.Content("~/")});
     }
 
     [Authorize(Roles = "Customer")]
@@ -71,9 +76,10 @@ public class HomeController : Controller
                             return RedirectToAction("Index", "Customer");
                         }
                     }
-                    else if (roles.Contains("Admin"))
+                    else if (roles.Contains("AppAdmin"))
                     {
-                        return RedirectToAction("Index", "Admin");
+                        Console.WriteLine("AppAdmin login");
+                        return RedirectToAction("Index", "AppAdmin");
                     }
                     // Add more roles as needed
                 }

@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using OnlineFoodOrderingSystem.Models.Users.Admin;
 
 namespace OnlineFoodOrderingSystem.Controllers;
+
 
 public class AppAdminController:Controller
 {
@@ -16,8 +18,11 @@ public class AppAdminController:Controller
         _passwordHasher=passwordHasher;
     }
 
+    [Authorize(Roles = "AppAdmin")]
+    [ValidateAntiForgeryToken]
     public IActionResult Index()
     {
+        Console.WriteLine("Getting all users");
         return View(_userManager.Users);
     }
     
