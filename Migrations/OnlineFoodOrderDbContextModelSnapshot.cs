@@ -43,7 +43,7 @@ namespace OnlineFoodOrderingSystem.Migrations
 
                     b.HasKey("ProductID");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("OnlineFoodOrderingSystem.Models.Preference.Preference", b =>
@@ -58,7 +58,7 @@ namespace OnlineFoodOrderingSystem.Migrations
 
                     b.HasKey("PreferenceId");
 
-                    b.ToTable("Preference");
+                    b.ToTable("Preferences");
                 });
 
             modelBuilder.Entity("OnlineFoodOrderingSystem.Models.Users.Admin.Admin", b =>
@@ -71,7 +71,7 @@ namespace OnlineFoodOrderingSystem.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
@@ -100,7 +100,7 @@ namespace OnlineFoodOrderingSystem.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Admin");
+                    b.ToTable("Admins");
                 });
 
             modelBuilder.Entity("OnlineFoodOrderingSystem.Models.Users.Customer.Customer", b =>
@@ -113,7 +113,7 @@ namespace OnlineFoodOrderingSystem.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
@@ -142,7 +142,7 @@ namespace OnlineFoodOrderingSystem.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("OnlineFoodOrderingSystem.Models.Users.Customer.CustomerPreference", b =>
@@ -180,7 +180,7 @@ namespace OnlineFoodOrderingSystem.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
@@ -209,7 +209,7 @@ namespace OnlineFoodOrderingSystem.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Provider");
+                    b.ToTable("Providers");
                 });
 
             modelBuilder.Entity("OnlineFoodOrderingSystem.Models.Users.Customer.CustomerPreference", b =>

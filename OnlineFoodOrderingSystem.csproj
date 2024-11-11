@@ -31,4 +31,8 @@
     <AdditionalFiles Include="Views\Role\Index.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\AppIdentityDb\" />
+  </ItemGroup>
+
 </Project>
