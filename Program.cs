@@ -42,6 +42,7 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     DbInitializer.Seed(services);
+    await RoleInitializer.SeedRolesAsync(services);
 }
 
 // Configure the HTTP request pipeline.
