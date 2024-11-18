@@ -1,0 +1,142 @@
+/* styles.css */
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fff8e1; /* Light, warm background like fast food packaging */
+    color: #333;
+    padding-top: 20px;
+}
+
+/* Header */
+h1 {
+    color: #d32f2f; /* Bold red, often used in fast food */
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Cart Section */
+.alert-info {
+    background-color: #ffeb3b; /* Bright yellow background */
+    color: #000;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+}
+
+#cart-count {
+    font-size: 1.2rem;
+    color: #f57c00; /* Orange, reminiscent of fast food brands */
+}
+
+/* Product Cards */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    background-color: #fff;
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: translateY(-10px); /* Elevates the card on hover */
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 2px solid #f57c00; /* Divider line */
+}
+
+.card-body {
+    padding: 15px;
+    text-align: center;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #d32f2f; /* Fast food style red */
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.card-text strong {
+    font-size: 1.2rem;
+    color: #f57c00;
+}
+
+/* Button */
+.btn-primary {
+    background-color: #d32f2f; /* Red button */
+    border-color: #d32f2f;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    padding: 10px 0;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #b71c1c; /* Darker red on hover */
+}
+
+.form-control {
+    border: 2px solid #f57c00;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff3e0;
+}
+
+.form-control:focus {
+    border-color: #d32f2f;
+}
+
+/* Layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.col-md-4 {
+    width: 30%;
+    margin-bottom: 30px;
+    padding: 0 15px;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+    .col-md-4 {
+        width: 48%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .col-md-4 {
+        width: 100%;
+    }
+}

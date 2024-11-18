@@ -9,59 +9,77 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Register ApplicationDbContext with Sqlite
+// Register OnlineFoodOrderDbContext with SQLite
 builder.Services.AddDbContext<OnlineFoodOrderDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Register AppIdentityDbContext with Sqlite
+// Register AppIdentityDbContext for Identity with SQLite
 builder.Services.AddDbContext<AppIdentityDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddIdentity<AppUser, IdentityRole>()
-    .AddEntityFrameworkStores<AppIdentityDbContext>()
-    .AddDefaultTokenProviders();
-
-builder.Services.AddScoped<IProductService, ProductService>();
-
-builder.Services.Configure<IdentityOptions>(opts =>
+// Configure Identity
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 {
-    opts.User.RequireUniqueEmail = true;
-    opts.Password.RequiredLength = 8;
-    opts.Password.RequireLowercase = true;
-});
+    options.User.RequireUniqueEmail = true;
+    options.Password.RequiredLength = 8;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireNonAlphanumeric = false; // Optional: make password rules less strict
+})
+.AddEntityFrameworkStores<AppIdentityDbContext>()
+.AddDefaultTokenProviders();
 
-
+// Configure Application Cookie
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = "/Account/Login"; 
+    options.LoginPath = "/Account/Login"; // Redirect to Login page
+    options.AccessDeniedPath = "/Account/AccessDenied"; // Redirect to Access Denied page
 });
 
+// Register services for dependency injection
+builder.Services.AddScoped<IProductService, ProductService>();
+
+// Enable session support
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+
+// Build the app
 var app = builder.Build();
 
+// Seed initial data for database and roles
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
+
+    // Seed the database
     DbInitializer.Seed(services);
+
+    // Seed roles
     await RoleInitializer.SeedRolesAsync(services);
 }
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
+    app.UseHsts(); // Adds HTTP Strict Transport Security
 }
 
-
-app.UseStaticFiles();
+app.UseHttpsRedirection(); // Redirect HTTP requests to HTTPS
+app.UseStaticFiles(); // Serve static files
 
 app.UseRouting();
 
+// Enable session middleware
+app.UseSession();
+
+// Enable authentication and authorization
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Map controller routes
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-
+// Run the application
 app.Run();

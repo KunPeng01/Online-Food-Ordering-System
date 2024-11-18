@@ -1,38 +1,44 @@
-@model IEnumerable<OnlineFoodOrderingSystem.Models.Items.Product> // Accepting a list of products
+@model IEnumerable<OnlineFoodOrderingSystem.Models.Items.Product>
 @{
-    ViewData["Title"] = "Product List"; // Set the page title
+    ViewData["Title"] = "Product List";
 }
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css" />
-    </head>
+    @* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css" /> *@
+    <link rel="stylesheet" href="~/css/menu.css" /> <!-- Corrected path -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
 <body>
     <div class="container mt-4">
         <h1>@ViewData["Title"]</h1>
-        
+
         <!-- Cart Section -->
         <div class="alert alert-info">
             <h4>Shopping Cart</h4>
             <p id="cart-count">Items in Cart: 0</p> <!-- Placeholder for cart item count -->
             <a href="/Cart" class="btn btn-secondary">View Cart</a>
         </div>
-        
+
         <div class="row">
-            @foreach (var product in Model) // Loop through each product in the model
+            @foreach (var product in Model)
             {
-                <div class="col-md-4 mb-4"> <!-- Each product card in a column -->
+                <div class="col-md-4 mb-4">
                     <div class="card">
-                        <img src="@product.ImageUrl" alt="@product.Name" class="card-img-top" style="height: 250px; object-fit: cover;" />
+                        <img src="@product.ImageUrl" alt="@product.Name" class="card-img-top"
+                            style="height: 250px; object-fit: cover;" />
                         <div class="card-body">
                             <h5 class="card-title">@product.Name</h5>
                             <p class="card-text">@product.Description</p>
                             <p class="card-text"><strong>Price: @product.Price.ToString("C")</strong></p>
-                            <form asp-action="AddToCart" method="post"> 
+                            <form class="add-to-cart-form" data-product-id="@product.ProductID">
                                 <input type="hidden" name="productId" value="@product.ProductID" />
                                 <input type="number" name="quantity" value="1" min="1" class="form-control mb-2" />
                                 <button type="submit" class="btn btn-primary">Add to Cart</button>
@@ -43,5 +49,39 @@
             }
         </div>
     </div>
-    </body>
+
+    <script>
+        // Event listener for form submission
+        $(".add-to-cart-form").submit(function (e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            var form = $(this);
+            var productId = form.find("input[name='productId']").val();
+            var quantity = form.find("input[name='quantity']").val();
+
+            // Send the data using AJAX
+            $.ajax({
+                url: '/Cart/AddToCart',
+                type: 'POST',
+                data: {
+                    productId: productId,
+                    quantity: quantity
+                },
+                success: function (response) {
+                    if (response.success) {
+                        // Update the cart count in the UI
+                        $("#cart-count").text("Items in Cart: " + response.cartCount);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert("An error occurred while adding the product to the cart.");
+                }
+            });
+        });
+    </script>
+
+</body>
+
 </html>
