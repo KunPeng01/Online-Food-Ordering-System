@@ -1,0 +1,63 @@
+@model List<OnlineFoodOrderingSystem.Models.Cart.OrderItem>
+
+@{
+    ViewData["Title"] = "Your Cart";
+}
+
+<h2>Your Cart</h2>
+
+<!-- Linking the CSS for fast food styling -->
+<link rel="stylesheet" href="~/css/showcart.css" />
+
+@if (Model == null || !Model.Any())
+{
+    <p class="empty-cart-message">Your cart is empty. Time to grab some tasty items!</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product Image</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="@item.Product.ImageUrl" alt="@item.Product.Name" class="product-img" />
+                    </td>
+                    <td>@item.Product.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Product.Price.ToString("C")</td>
+                    <td>@(item.Quantity * item.Product.Price).ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Cart Summary -->
+    <div class="cart-summary">
+        <p><strong>Total Items:</strong> @Model.Sum(item => item.Quantity)</p>
+        <p><strong>Total Price:</strong> @Model.Sum(item => item.Quantity * item.Product.Price).ToString("C")</p>
+
+        @{
+            decimal totalPrice = Model.Sum(item => item.Quantity * item.Product.Price);
+            decimal tax = totalPrice * 0.13m;
+            decimal totalPriceWithTax = totalPrice + tax;
+        }
+
+        <p><strong>Tax (13%):</strong> @tax.ToString("C")</p>
+        <p><strong>Total Price with Tax:</strong> @totalPriceWithTax.ToString("C")</p>
+    </div>
+
+    <div class="actions">
+        <a href="@Url.Action("Checkout", "Order")" class="btn btn-primary">Proceed to Checkout</a>
+        <a href="@Url.Action("Index", "Customer")" class="btn btn-secondary">Continue Shopping</a>
+    </div>
+}

@@ -105,6 +105,15 @@ namespace OnlineFoodOrderingSystem.Controllers
         {
             return View(orderDetails);
         }
+
+        public IActionResult ShowCart()
+        {
+            // Retrieve the cart from the session (or initialize an empty cart if not present)
+            var cart = HttpContext.Session.GetObjectFromJson<List<OrderItem>>("Cart") ?? new List<OrderItem>();
+
+            // Pass the cart to the view to display the items
+            return View(cart);
+        }
     
     }
 }
