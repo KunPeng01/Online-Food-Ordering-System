@@ -1,0 +1,76 @@
+/* Fast Food Theme Styles */
+
+/* General body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fff8e6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Header styling */
+h2 {
+    color: #d32f2f; /* Red shade */
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* Form container */
+form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff7e1; /* Light yellow */
+    border: 1px solid #f5d27a; /* Soft orange-yellow */
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Form labels */
+form label {
+    font-weight: bold;
+    color: #d32f2f; /* Red */
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+/* Form inputs */
+form input, form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #f5c25a; /* Gold outline */
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Input focus effect */
+form input:focus, form select:focus {
+    border-color: #ffa000; /* Deep orange */
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 160, 0, 0.5);
+}
+
+/* Validation messages */
+.text-danger {
+    font-size: 0.85em;
+    color: #e53935; /* Darker red */
+}
+
+/* Buttons */
+button[type="submit"] {
+    background-color: #d32f2f; /* Red */
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+button[type="submit"]:hover 

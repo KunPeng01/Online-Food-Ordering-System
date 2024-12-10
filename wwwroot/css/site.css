@@ -1,4 +1,4 @@
-html {
+/* html {
   font-size: 14px;
 }
 
@@ -49,4 +49,142 @@ body {
     padding: 0.25rem 1.5rem; 
     border-radius: 6px;
     margin-right: 1.5rem;
+} */
+
+/* Base Styles */
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+      font-size: 16px;
+  }
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #fff5e1; /* Light yellowish background */
+  color: #333;
+  margin-bottom: 60px;
+  position: relative;
+  min-height: 100%;
+}
+
+/* Button Styles */
+.btn:focus, 
+.btn:active:focus, 
+.btn-link.nav-link:focus, 
+.form-control:focus, 
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #ff4500; /* Fast-food orange highlight */
+}
+
+.btn {
+  padding: 0.5rem 1.5rem;
+  background-color: #ffcc00; /* Bright yellow (fries) */
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #ff4500; /* Bold orange on hover */
+  color: #fff;
+}
+
+/* Auth Form Styles */
+.auth-form {
+  margin: 40px auto;
+  max-width: 400px;
+  padding: 40px;
+  border: 2px solid #ff4500; /* Bold orange border */
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: #fff; /* Clean white background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.auth-form ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.auth-input input {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.auth-input input:focus {
+  border-color: #ff4500; /* Orange border on focus */
+  outline: none;
+}
+
+.auth-input button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 99999px;
+  background-color: #ff4500; /* Orange button */
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.auth-input button:hover {
+  background-color: #d32f2f; /* Reddish-orange hover effect */
+}
+
+/* Login Button */
+.login-button {
+  padding: 0.25rem 1.5rem;
+  border-radius: 6px;
+  margin-right: 1.5rem;
+  background-color: #ffcc00; /* Fast-food yellow */
+  color: #333;
+  font-weight: bold;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #ffa500; /* Slightly darker yellow on hover */
+}
+
+/* Footer (Optional for Fast Food Aesthetic) */
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #ff4500; /* Bold orange footer */
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 0.9rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .auth-form {
+      margin: 20px auto;
+      padding: 20px;
+  }
+
+  .btn {
+      padding: 0.4rem 1.2rem;
+  }
+
+  .auth-input button {
+      width: 100%;
+  }
 }

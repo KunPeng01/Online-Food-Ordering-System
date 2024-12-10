@@ -2,13 +2,8 @@
     ViewData["Title"] = "Order Confirmation";
 }
 
-<h2>@ViewData["Title"]</h2>
-<p>Your order has been placed successfully!</p>
-<p>Order Details:</p>
-<ul>
-    <li><strong>Name:</strong> @Model.Name</li>
-    <li><strong>Address:</strong> @Model.Address</li>
-    <li><strong>Phone:</strong> @Model.Phone</li>
-    <li><strong>Email:</strong> @Model.Email</li>
-    <li><strong>Delivery Method:</strong> @Model.DeliveryMethod</li>
-</ul>
+<h2>Order Confirmation</h2>
+
+<p>Thank you for your order! Your order has been successfully placed.</p>
+
+<a href="@Url.Action("Index", "Order")" class="btn btn-primary">Return to Home</a>

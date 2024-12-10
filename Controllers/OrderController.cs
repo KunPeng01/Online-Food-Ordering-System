@@ -66,40 +66,6 @@ namespace OnlineFoodOrderingSystem.Controllers
             return View(cart);
         }
     
-        // GET: Checkout
-        [HttpGet]
-        public IActionResult Checkout()
-        {
-            return View();
-        }
-
-        // POST: Checkout
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Checkout(CheckoutModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var order = new
-                {
-                    Name = model.Name,
-                    Address = model.Address,
-                    Phone = model.Phone,
-                    Email = model.Email,
-                    DeliveryMethod = model.DeliveryMethod,
-                    CardNumber = model.CardNumber,
-                    ExpirationDate = model.ExpirationDate,
-                    Cvv = model.Cvv
-                };
-
-                // Redirect to an order confirmation page (you could also return a confirmation view here)
-                return RedirectToAction("OrderConfirmation", new { orderDetails = order });
-            }
-
-            // If validation fails, return the form with validation errors
-            return View(model);
-        }
-
         // Order Confirmation Page (for after the order is placed)
         public IActionResult OrderConfirmation(object orderDetails)
         {
@@ -115,5 +81,23 @@ namespace OnlineFoodOrderingSystem.Controllers
             return View(cart);
         }
     
+        [HttpGet]
+        public IActionResult Checkout(){
+            var model = new CheckoutModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult CheckOut(CheckoutModel model){
+            if(ModelState.IsValid){
+                return RedirectToAction("OrderConfirmation");
+            }
+            return View(model);
+        }
+
+        // public IActionResult OrderConfirmation(){
+        //     return View();
+        // }
+
     }
 }
