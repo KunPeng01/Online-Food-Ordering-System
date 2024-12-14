@@ -37,4 +37,15 @@ Actions:
 - Update (GET and POST): Displays role update form, and adding roles to users 
 
 The role pages for creating new roles and assigning roles to users is not accessible through the UI.
-The user must access the role pages through 
+The user must access the role pages through the '/Role' endpoint.
+
+Some data in the database is seeded upon creation. There are two default roles, Customer and Admin. All users are customers by default.
+There are also six default food items that are seeded upon database creation.
+
+The main packages used in this application are:
+- Microsoft.AspNetCore.Identity.EntityFrameworkCore
+- Microsoft.EntityFrameworkCore
+- Microsoft.EntityFrameworkCore.Design
+- Microsoft.EntityFrameworkCore.Sqlite
+
+These packages help with authentication, and CRUD operations between the app and the database.
